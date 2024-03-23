@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import none from "../../Assets/none.png";
 
 export default function ImageSlider({ images, handleItemClick, item }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -25,39 +26,40 @@ export default function ImageSlider({ images, handleItemClick, item }) {
   };
 
   return (
-    <div className="relative">
-      <div className="mb-44 flex flex-row">
-        <div style={{ height: "56px" }}>
-          {images && images.length > 0 ? (
-            <div>
-              <img
-                className="h-56 w-full object-contain absolute transition-transform"
-                src={images[currentImageIndex]}
-                alt={`Listing photo ${currentImageIndex + 1}`}
-                onClick={() => onItemClicked(item)}
-              />
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={handlePrevClick}
-                    className="absolute top-28 left-1 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded"
-                  >
-                    &lt;
-                  </button>
-                  <button
-                    onClick={handleNextClick}
-                    className="absolute top-28 right-1 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded"
-                  >
-                    &gt;
-                  </button>
-                </>
-              )}
-            </div>
-          ) : (
-            <p>No images available</p>
+    <div className="mb-3 flex flex-row items-center">
+      {images && images.length > 0 ? (
+        <div className="relative h-56 w-full">
+          <img
+            className="h-full w-full object-contain transition-transform"
+            src={images[currentImageIndex]}
+            alt={`Listing photo ${currentImageIndex + 1}`}
+            onClick={() => onItemClicked(item)}
+          />
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevClick}
+                className="absolute top-28 left-1 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded"
+              >
+                &lt;
+              </button>
+              <button
+                onClick={handleNextClick}
+                className="absolute top-28 right-1 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded"
+              >
+                &gt;
+              </button>
+            </>
           )}
         </div>
-      </div>
+      ) : (
+        <img
+          className="object-cover h-56 w-full"
+          src={none}
+          alt={`Listing photo`}
+          onClick={() => onItemClicked(item)}
+        />
+      )}
     </div>
   );
 }

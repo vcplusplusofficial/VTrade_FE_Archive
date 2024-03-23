@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CategoryScroll from "./HomePage/CategoryScroll.js";
 import SaleHighlights from "./HomePage/SaleHighlights.js";
 import RequestHighlights from "./HomePage/RequestHighlights.js";
 import RecentPosts from "./HomePage/RecentPosts";
@@ -15,7 +13,6 @@ export default function HomePage({ user, setUser, Loader }) {
   const [requestHighlights, setRequestHighlights] = useState(null);
   const [saleImages, setSaleImages] = useState(null);
   const [requestImages, setRequestImages] = useState(null);
-  const [allImages, setAllImages] = useState(null);
   const [recentPosts, setRecentPosts] = useState(null);
 
   useEffect(() => {
