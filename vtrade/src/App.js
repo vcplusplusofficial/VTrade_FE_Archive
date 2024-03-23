@@ -1,22 +1,20 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import ForgotPasswordConfirm from "./Components/ForgotPassword/ForgotPasswordConfirm";
 import ForgotPasswordEmail from "./Components/ForgotPassword/ForgotPasswordEmail";
-import NewPost from "./Components/NewPost";
 import NotFound from "./Components/NotFound";
-import { useState, useEffect } from "react";
 import apiClient from "./Services/apiClient";
-import PostOffer from "./Components/PostOffer";
-import PostDetails from "./Components/PostDetails";
 import HomePage from "./Components/HomePage";
 import ProductPage from "./Components/ProductPage";
 import Loader from "./Components/Loader";
 import Dashboard from "./Components/Dashboard";
 import Breadcrumbs from "./Components/Breadcrumbs";
 import CategoryPage from "./Components/CategoryPage";
+import PostListing from "./Components/PostListing";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -72,10 +70,6 @@ function App() {
             }
           />
           <Route
-            path="/post"
-            element={<NewPost user={user} setUser={setUser} />}
-          />
-          <Route
             path="/Dashboard"
             element={
               <Dashboard
@@ -88,7 +82,7 @@ function App() {
             }
           />
           <Route
-            path="/login"
+            path="/Login"
             element={
               <Login
                 user={user}
@@ -100,7 +94,7 @@ function App() {
             }
           />
           <Route
-            path="/register"
+            path="/Register"
             element={
               <Register
                 user={user}
@@ -130,9 +124,8 @@ function App() {
                 setUser={setUser}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
-              >
-                <Loader />
-              </ProductPage>
+                Loader={Loader}
+              />
             }
           />
 
@@ -140,13 +133,7 @@ function App() {
           <Route
             path="/:category"
             element={
-              <CategoryPage user={user} setUser={setUser}></CategoryPage>
-            }
-          />
-          <Route
-            path="/post/offer"
-            element={
-              <PostOffer
+              <CategoryPage
                 user={user}
                 setUser={setUser}
                 isLoading={isLoading}
@@ -156,9 +143,9 @@ function App() {
             }
           />
           <Route
-            path="/post/request"
+            path="/Post"
             element={
-              <PostDetails
+              <PostListing
                 user={user}
                 setUser={setUser}
                 isLoading={isLoading}

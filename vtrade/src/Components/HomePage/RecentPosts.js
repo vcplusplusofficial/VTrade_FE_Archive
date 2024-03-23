@@ -4,6 +4,7 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import apiClient from "../../Services/apiClient";
 import { useNavigate } from "react-router-dom";
+import none from "../../Assets/none.png";
 
 export default function RecentPosts({ user, setUser, recentPosts }) {
   const [recent_posts, setRecentPosts] = useState(null);

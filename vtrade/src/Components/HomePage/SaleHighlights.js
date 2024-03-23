@@ -35,9 +35,9 @@ export default function SaleHighlights({
           ? saleHighlights.map((item, i) => (
               <div
                 key={i}
-                className="flex flex-col justify-start  border-gray-100 border rounded-xl p-2 mr-3 cursor-pointer"
+                className="flex-shrink-0 w-72 flex flex-col justify-start border-gray-100 border rounded-xl p-2 mr-3 cursor-pointer"
               >
-                <div className="w-64 h-16 flex items-start no-scrollbar ">
+                <div className="w-full h-16 flex items-start no-scrollbar">
                   <div
                     className="bg-gray-300 rounded-full w-10 h-10 overflow-hidden hide-scroll-bar"
                     aria-label="profile-image"

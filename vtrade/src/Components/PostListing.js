@@ -1,16 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import apiClient from "../Services/apiClient";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Title,
   Condition,
   Description,
   PickupLocation,
   PaymentMethod,
+  Label,
 } from "./PostComponents/";
 
-export default function PostOffer(props) {
+export default function PostListing(props) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [condition, setCondition] = useState("");
@@ -20,6 +21,7 @@ export default function PostOffer(props) {
   const [customLocation, setCustomLocation] = useState("");
   const [price, setPrice] = useState(0.0);
   const [method, setMethod] = useState(null);
+  const [label, setLabel] = useState("");
   const [images, setImages] = useState([]);
   const [stringPrice, setStringPrice] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -90,6 +92,8 @@ export default function PostOffer(props) {
         setCategory(value);
       } else if (name === "condition") {
         setCondition(value);
+      } else if (name === "label") {
+        setLabel(value);
       } else if (name === "description") {
         setDescription(value);
       } else {
@@ -299,6 +303,7 @@ export default function PostOffer(props) {
                 condition={condition}
                 handleOnInputChange={handleOnInputChange}
               />
+              <Label label={label} handleOnInputChange={handleOnInputChange} />
 
               <p className="mt-4 text-light-black font-mulish text-basePlus font-normal tracking-wide">
                 Price

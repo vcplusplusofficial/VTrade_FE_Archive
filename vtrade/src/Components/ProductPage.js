@@ -8,6 +8,7 @@ import apiClient from "../Services/apiClient";
 import Loader from "./Loader";
 import ConfirmPurchase from "./ConfirmPurchase";
 import MakeOffer from "./MakeOffer";
+import none from "../Assets/none.png";
 import {
   arrowUpSvg,
   arrowDownSvg,
@@ -233,7 +234,34 @@ export default function ProductPage({
                   </div>
                 </div>
               </div>
-            ) : null}
+            ) : (
+              <div>
+                <div className="ml-44 my-10 relative">
+                  <img
+                    className="ml-8 max-w-lg max-h-lg mx-auto object-contain"
+                    src={none}
+                    alt={`no image`}
+                    style={{ width: "512px", height: "512px" }}
+                  />
+                  <div className="absolute top-0 right-0 flex flex-row items-end p-4">
+                    <div
+                      className="cursor-pointer mr-2"
+                      // change this onClick
+                      onClick={() => console.log("Share button clicked")}
+                    >
+                      {shareSvg}
+                    </div>
+                    <div
+                      className="cursor-pointer"
+                      // change this onClick
+                      onClick={() => setLiked(!liked)}
+                    >
+                      {liked ? filledHeartSvg : unfilledHeartSvg}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="flex flex-col ml-5">
               <div class="text-black font-mulish text-lg font-semibold tracking-tighter">
                 {item.title}

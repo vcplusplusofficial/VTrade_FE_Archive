@@ -1,16 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 import { MENU_ITEMS } from "../Constants";
-import DropdownMenu from "./DropDownMenu";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function Navbar(props) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Function to handle menu item click
-  const handleMenuItemClick = (id) => {
+  const handleMenuItemClick = (event, id) => {
+    event.preventDefault(); // Prevent the default anchor behavior
     navigate(id, { state: { category: id } });
   };
 
@@ -18,20 +14,18 @@ export default function Navbar(props) {
     navigate("/dashboard");
   };
 
-  const toggleMenu = () => {
-    if (!isMenuOpen) {
-      setIsMenuOpen(!isMenuOpen);
+  const handlePostClick = () => {
+    if (!props.user) {
+      navigate("/login");
+    } else {
+      navigate("/post");
     }
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
   };
 
   const navigate = useNavigate();
   return (
     <div className="z-10 relative flex justify-between items-centers opacity-6 h-20 bg-[#edebeb] p-5 drop-shadow-md ring-2 ring-gray-400">
-      <div className="flex items-center place-items-center">
+      <div className="flex flex-shrink-0 items-center place-items-center">
         <div className="py-6">
           <button
             className="bg-transparent font-mulish border-none tracking-[0.2px] uppercase text-center text-lg font-bold cursor-pointer text-gray-700 ml-14 w-24"
@@ -47,11 +41,10 @@ export default function Navbar(props) {
         <div className="flex flex-row gap-8 h-6">
           {MENU_ITEMS.map((menuItem) => (
             <p key={menuItem.id}>
-              {/* Use an onClick event handler to call handleMenuItemClick */}
               <a
                 className="text-gray-600 hover:text-black font-mulish font-semibold text-14 leading-18 capitalize tracking-[0.2px] cursor-pointer"
                 href={`/${menuItem.id}`}
-                onClick={() => handleMenuItemClick(menuItem.id)}
+                onClick={(e) => handleMenuItemClick(e, menuItem.id)}
               >
                 {menuItem.text}
               </a>
@@ -76,23 +69,14 @@ export default function Navbar(props) {
         >
           {props.user ? "Log out" : "Log in"}
         </button>
-        <div
-          className={`flex flex-col justify-end items-center ${
-            isMenuOpen ? "mt-24" : "mt-0"
-          }`}
-          onMouseEnter={toggleMenu}
-          onMouseLeave={closeMenu}
-        >
+        <div className="flex flex-col justify-end items-center mt-0$">
           <button
-            className={`p-3 px-4 w-20 font-mulish text-center font-bold text-14 leading-18 tracking-wider border-none outline-none cursor-pointer mr-4 text-white hover:bg-[#808080] ${
-              isMenuOpen ? "bg-[#808080]" : "bg-black"
-            }`}
+            className="p-3 px-4 w-20 font-mulish text-center font-bold text-14 leading-18 tracking-wider border-none outline-none cursor-pointer mr-4 text-white hover:bg-[#808080]    bg-black"
             type="button"
-            onClick={toggleMenu}
+            onClick={handlePostClick}
           >
             Post
           </button>
-          <DropdownMenu isOpen={isMenuOpen} props={props} />
         </div>
         {props.user ? (
           <div

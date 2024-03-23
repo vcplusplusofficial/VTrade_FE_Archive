@@ -13,7 +13,6 @@ export default function Description({ description, handleOnInputChange }) {
         placeholder="Describe what you are selling and include any details a buyer might be interested in. People love items with stories!"
         value={description}
         onChange={handleOnInputChange}
-        autoFocus
         rows={3}
       />
     </div>
